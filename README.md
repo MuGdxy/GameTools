@@ -10,18 +10,14 @@
 
 ### 快速开始
 
-#### 一键远程运行（无需下载）
+#### 一键远程运行（无需下载，支持传参）
 
 ```powershell
-irm https://raw.githubusercontent.com/MuGdxy/GameTools/main/auto-backup.ps1 | iex
-```
+# 默认参数
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/MuGdxy/GameTools/main/auto-backup.ps1)))
 
-#### 下载后运行（支持传参）
-
-```powershell
-$scriptPath = "$env:TEMP\auto-backup.ps1"
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/MuGdxy/GameTools/main/auto-backup.ps1 -OutFile $scriptPath
-& $scriptPath -Path "C:\Projects\MyApp" -IntervalMinutes 2 -BufferSize 20
+# 带参数
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/MuGdxy/GameTools/main/auto-backup.ps1))) -Path "C:\Projects\MyApp" -IntervalMinutes 2 -BufferSize 20
 ```
 
 #### 本地调用
