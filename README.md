@@ -46,13 +46,6 @@ cd GameTools
 | `-OutputDir` | string | `<目录名>_backups`（同级） | 备份 zip 存放目录 |
 | `-IntervalMinutes` | double | `5` | 每次备份的间隔（分钟），最小 0.1 |
 | `-BufferSize` | int | `10` | 环形缓冲区大小（最多保留的 zip 数量） |
-| `-ExcludePatterns` | string[] | 见下方 | 排除的文件/文件夹名称 |
-
-**默认排除列表：**
-
-```
-_backups, .git, node_modules, __pycache__, .venv, venv, bin, obj, .vs, .idea
-```
 
 ### 使用示例
 
@@ -66,10 +59,7 @@ _backups, .git, node_modules, __pycache__, .venv, venv, bin, obj, .vs, .idea
 # 示例 3：自定义输出目录
 .\auto-backup.ps1 -Path C:\Work -OutputDir D:\Backups\WorkBackups
 
-# 示例 4：自定义排除列表
-.\auto-backup.ps1 -ExcludePatterns @('.git', 'node_modules', 'dist', 'build')
-
-# 示例 5：30 秒备份一次（用于关键操作期间）
+# 示例 4：30 秒备份一次（用于关键操作期间）
 .\auto-backup.ps1 -IntervalMinutes 0.5 -BufferSize 5
 ```
 
@@ -83,7 +73,6 @@ _backups, .git, node_modules, __pycache__, .venv, venv, bin, obj, .vs, .idea
   Output:      C:\Projects\MyApp_backups
   Interval:    5 min (300 s)
   Buffer size: 10
-  Excludes:    _backups, .git, node_modules, ...
 ============================================
 
 Press Ctrl+C to stop.

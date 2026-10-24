@@ -97,7 +97,6 @@ Write-Host "  Source:      $Path"
 Write-Host "  Output:      $OutputDir"
 Write-Host "  Interval:    $IntervalMinutes min ($intervalSeconds s)"
 Write-Host "  Buffer size: $BufferSize"
-Write-Host "  Excludes:    $($ExcludePatterns -join ', ')"
 Write-Host '============================================'
 Write-Host ''
 Write-Host 'Press Ctrl+C to stop.'
