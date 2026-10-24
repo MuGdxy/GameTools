@@ -39,7 +39,7 @@ cd GameTools
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | `-Path` | string | 当前目录 `$PWD` | 要备份的目录路径 |
-| `-OutputDir` | string | `<目录名>_backups`（同级） | 备份 zip 存放目录 |
+| `-OutputDir` | string | `<目录>/_backups`（目录内部） | 备份 zip 存放目录 |
 | `-IntervalMinutes` | double | `5` | 每次备份的间隔（分钟），最小 0.1 |
 | `-BufferSize` | int | `10` | 环形缓冲区大小（最多保留的 zip 数量） |
 
@@ -66,7 +66,7 @@ cd GameTools
   Auto-Backup (Ring Buffer)
 ============================================
   Source:      C:\Projects\MyApp
-  Output:      C:\Projects\MyApp_backups
+  Output:      C:\Projects\MyApp\_backups
   Interval:    5 min (300 s)
   Buffer size: 10
 ============================================

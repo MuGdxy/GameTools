@@ -35,9 +35,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $Path = (Resolve-Path $Path).Path
 if (-not $OutputDir) {
-    $OutputDir = Join-Path (Split-Path $Path -Parent) (
-        '{0}_backups' -f (Split-Path $Path -Leaf)
-    )
+    $OutputDir = Join-Path $Path '_backups'
 }
 if (-not (Test-Path $OutputDir)) {
     New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
