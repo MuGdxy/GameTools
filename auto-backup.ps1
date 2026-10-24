@@ -15,9 +15,6 @@
     Minutes between each backup.  Default: 5.
 .PARAMETER BufferSize
     Maximum number of zip files to keep (ring buffer depth).  Default: 10.
-.PARAMETER ExcludePatterns
-    Wildcard patterns for files/folders to exclude (e.g. "node_modules",
-    ".git", "_backups").  Defaults to common heavy/transient directories.
 .EXAMPLE
     .\auto-backup.ps1
     Backs up $PWD every 5 minutes, keeping the latest 10 zips.
@@ -32,11 +29,7 @@ param(
     [ValidateRange(0.1, [double]::MaxValue)]
     [double]$IntervalMinutes = 5,
     [ValidateRange(1, [int]::MaxValue)]
-    [int]$BufferSize = 10,
-    [string[]]$ExcludePatterns = @(
-        '_backups', '.git', 'node_modules', '__pycache__',
-        '.venv', 'venv', 'bin', 'obj', '.vs', '.idea'
-    )
+    [int]$BufferSize = 10
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -73,13 +66,9 @@ function New-BackupZip {
     $tempDir   = Join-Path ([System.IO.Path]::GetTempPath()) "backup_staging_$timestamp"
     try {
         New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
-        $excludeSet = [System.Collections.Generic.HashSet[string]]::new(
-            [System.StringComparer]::OrdinalIgnoreCase
-        )
-        foreach ($p in $ExcludePatterns) { [void]$excludeSet.Add($p) }
-        [void]$excludeSet.Add((Split-Path $OutputDir -Leaf))
+        $outputLeaf = Split-Path $OutputDir -Leaf
         $items = Get-ChildItem -Path $Path -Force | Where-Object {
-            -not $excludeSet.Contains($_.Name)
+            $_.Name -ne $outputLeaf
         }
         foreach ($item in $items) {
             $dest = Join-Path $tempDir $item.Name
